@@ -16,6 +16,15 @@ public abstract class Vehicel : MonoBehaviour
     [SerializeField] private float speed = 50;
     public float Speed { get => speed; private set => speed = value; }
 
+    [SerializeField] VehicleType vehicleType;
+    protected void Start()
+    {
+        if (GameManager.Instance.ChoosenVehicle != vehicleType)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     protected void Update()
     {
         getInputAxis();
@@ -32,4 +41,10 @@ public abstract class Vehicel : MonoBehaviour
 
     // ABSTRACTION
     protected abstract void OnMove();
+
+    public enum VehicleType
+    {
+        CAR = 0, 
+        PLANE = 1
+    }
 }
